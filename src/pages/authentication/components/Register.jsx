@@ -22,7 +22,7 @@ export const Register = () => {
           message: "请输入合法的邮箱"
         }
       ]}>
-        <Input prefix={<UserOutlined />} placeholder="请输入邮箱" />
+        <Input prefix={<UserOutlined />} placeholder="请输入邮箱" className="site-form-item-icon" />
       </Form.Item>
       <Form.Item label="密码" name="password" rules={[
         {
@@ -30,7 +30,7 @@ export const Register = () => {
           message: "请输入密码"
         }
       ]}>
-        <Input.Password prefix={<LockOutlined />} placeholder="请输入密码" />
+        <Input.Password prefix={<LockOutlined />} placeholder="请输入密码" className="site-form-item-icon" />
       </Form.Item>
       <Form.Item>
         <Button style={{width: "100%"}} type={"primary"} htmlType={"submit"}>注册</Button>
