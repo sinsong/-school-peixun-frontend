@@ -12,9 +12,9 @@ const API_URL = process.env.REACT_APP_API_URL_BASE
 export const http = async (path, {data, token, ...restConfig}) => {
   const config = {
     method: "GET",
-    header: {
+    headers: {
       "Content-Type": data ? "application/json" : "",
-      "Authorization": token ? `Bearer ${token}` : ""
+      Authorization: token ? `Bearer ${token}` : ""
     },
     ...restConfig
   }
