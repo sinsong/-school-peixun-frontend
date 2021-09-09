@@ -43,7 +43,7 @@ export const register = (data) => {
   })
 }
 
-export const logout = () => {
+export const logout = async () => {
   window.localStorage.removeItem(localstorageKey)
 }
 
