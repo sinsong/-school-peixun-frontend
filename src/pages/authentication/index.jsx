@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Login } from "./components/Login"
 import { Register } from "./components/Register"
+import { Button } from "antd"
 
 const Authentication = () => {
     const [isRegister, setIsRegister] = useState(false);
@@ -10,9 +11,9 @@ const Authentication = () => {
             {
                 isRegister ? <Register /> : <Login />
             }
-            <a onClick={ () => { setIsRegister(!isRegister) } }>
+            <Button type="link" onClick={() => {setIsRegister(!isRegister)}}>
                 { !isRegister ? "请注册" : "请登录" }
-            </a>
+            </Button>
         </div>
     )
 }

@@ -1,5 +1,8 @@
 import { useAuth } from "../../../context/auth-context"
 import { Button, Form, Input } from "antd"
+import { UserOutlined, LockOutlined } from "@ant-design/icons"
+
+const Item = Form.Item // 用来缩写
 
 export const Register = () => {
   const { register } = useAuth()
@@ -19,7 +22,7 @@ export const Register = () => {
           message: "请输入合法的邮箱"
         }
       ]}>
-        <Input />
+        <Input prefix={<UserOutlined />} />
       </Form.Item>
       <Form.Item label="密码" name="password" rules={[
         {
@@ -27,7 +30,7 @@ export const Register = () => {
           message: "请输入密码"
         }
       ]}>
-        <Input.Password />
+        <Input.Password prefix={<LockOutlined />} />
       </Form.Item>
       <Form.Item>
         <Button style={{width: "100%"}} type={"primary"} htmlType={"submit"}>注册</Button>

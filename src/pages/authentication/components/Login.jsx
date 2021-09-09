@@ -1,5 +1,6 @@
 import { useAuth } from "../../../context/auth-context"
 import { Button, Form, Input } from "antd"
+import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
 export const Login = () => {
   const { login } = useAuth();
@@ -15,7 +16,7 @@ export const Login = () => {
           message: "请输入您的邮箱"
         }
       ]}>
-        <Input />
+        <Input prefix={<UserOutlined />} />
       </Form.Item>
       <Form.Item label="密码：" name="password" rules={[
         {
@@ -23,7 +24,7 @@ export const Login = () => {
           message: "请输入您的密码"
         }
       ]}>
-        <Input.Password />
+        <Input.Password prefix={<LockOutlined />} />
       </Form.Item>
       <Form.Item>
         <Button style={{width: "100%"}} type={"primary"} htmlType={"submit"}>登录</Button>
