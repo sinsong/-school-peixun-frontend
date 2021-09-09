@@ -1,5 +1,5 @@
 import { useAuth } from "../../../context/auth-context"
-import { Button } from "antd"
+import { Button, Form, Input } from "antd"
 
 export const Register = () => {
   const { register } = useAuth()
@@ -12,12 +12,26 @@ export const Register = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">邮箱:</label>
-      <input type="text" name="email" id="email" placeholder={"请输入合法的邮箱"}></input>
-      <label htmlFor="password">密码:</label>
-      <input text="password" name="password" id="password" placeholder={"请输入密码"}></input>
-      <Button type={"submit"}>注册</Button>
-    </form>
+    <Form onFinish={handleSubmit}>
+      <Form.Item label="邮箱" name="email" rules={[
+        {
+          required: true,
+          message: "请输入合法的邮箱"
+        }
+      ]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="密码" name="password" rules={[
+        {
+          required: true,
+          message: "请输入密码"
+        }
+      ]}>
+        <Input.Password />
+      </Form.Item>
+      <Form.Item>
+        <Button style={{width: "100%"}} type={"primary"} htmlType={"submit"}>注册</Button>
+      </Form.Item>
+    </Form>
   )
 }
