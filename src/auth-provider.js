@@ -43,6 +43,7 @@ export const register = (data) => {
   })
 }
 
+// auth-context 里头会 logout().then() 所以需要 async 关键字，从而返回一个 Promise
 export const logout = async () => {
   window.localStorage.removeItem(localstorageKey)
 }
