@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "antd": "^4.16.13",
     "json-server": "^0.16.3",
     "json-server-auth": "^2.1.0"
   }

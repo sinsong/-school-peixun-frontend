@@ -1,5 +1,5 @@
 // const { createContext } = require("react");
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import * as auth from "../auth-provider"
 import {http} from "../utils/http"
 
@@ -20,7 +20,7 @@ export const AuthProvider = ({children}) => {
   // method
   const login = (form) => auth.login(form).then(setUser)
   const register = (form) => auth.register(form).then(setUser)
-  const logout = () => auth.logout.then(() => setUser(null))
+  const logout = () => auth.logout().then(() => setUser(null))
 
   // 防止刷新后 user 信息失效
   useEffect(()=>{
