@@ -1,23 +1,13 @@
 // import logo from './logo.svg';
 import './App.less';
+import React from 'react'
 import { AuthProvider, useAuth } from './context/auth-context';
 import PageLoading from './components/page-loading';
+import { lazyImport } from './utils/lazyimport';
 
 // 延迟加载 (懒加载)
-import React from 'react'
-const Authentication = React.lazy(() => {
-  return Promise.all([
-    import("./pages/authentication"),
-    new Promise(resolve => setTimeout(resolve, 3000))
-]).then(([moduleExports]) => moduleExports)
-})
-
-const Home = React.lazy(() => {
-  return Promise.all([
-    import("./pages/home"),
-    new Promise(resolve => setTimeout(resolve, 3000))
-  ]).then(([moduleExports]) => moduleExports)
-})
+const Authentication = lazyImport(import("./pages/authentication"), 3000)
+const Home = lazyImport(import("./pages/home"), 3000)
 
 function App() {
   const { user } = useAuth();
