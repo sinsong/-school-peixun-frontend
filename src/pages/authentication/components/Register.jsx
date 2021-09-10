@@ -1,5 +1,5 @@
 import { useAuth } from "../../../context/auth-context"
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, notification } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
 const Item = Form.Item // 用来缩写
@@ -7,11 +7,18 @@ const Item = Form.Item // 用来缩写
 export const Register = () => {
   const { register } = useAuth()
   
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const email = event.target[0].value;
-    const password = event.target[1].value;
-    register({email, password})
+  const handleSubmit = ({cpassword, ...value}) => {
+    if (cpassword === value.password)
+    {
+      register(value)
+    }
+    else
+    {
+      notification["error"]({
+        message: "注册失败",
+        description: "密码不匹配"
+      })
+    }
   }
 
   return (
@@ -31,6 +38,14 @@ export const Register = () => {
         }
       ]}>
         <Input.Password prefix={<LockOutlined />} placeholder="请输入密码" className="site-form-item-icon" />
+      </Form.Item>
+      <Form.Item label="确认" name="cpassword" rules={[
+        {
+          required: true,
+          message: "密码不一致"
+        }
+      ]}>
+        <Input.Password prefix={<LockOutlined />} placeholder="确认密码" className="site-form-item-icon" />
       </Form.Item>
       <Form.Item>
         <Button style={{width: "100%"}} type={"primary"} htmlType={"submit"}>注册</Button>

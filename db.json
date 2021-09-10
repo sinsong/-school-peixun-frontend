@@ -14,6 +14,12 @@
       "email": "someone@example.com",
       "password": "$2a$10$BIMUCVjQ7UWPL09fhJ0eReHinr1vaLrPz1ZhRtDLePRSK0chjCvvu",
       "id": 3
+    },
+    {
+      "email": "hehe@hehe.com",
+      "password": "$2a$10$FPymHZXLJqZSnaHXZ/axxOV5NG2f839/uhjfzXy/t2nXMuBGpUllW",
+      "cpassword": "hehe",
+      "id": 4
     }
   ]
 }
