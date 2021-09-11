@@ -1,11 +1,13 @@
 const API_URL = process.env.REACT_APP_API_URL_BASE
 
-const localstorageKey = "__ca_access_token__";
+const localstorageKey = "__ca_access_token__"
+const userIDStorageKey = "__ca_user_id__"
 
 export const getToken = () => window.localStorage.getItem(localstorageKey)
-
+export const getCurrentUserID = () => window.localStorage.getItem(userIDStorageKey)
 export const handleUserResponse = (user) => {
-  window.localStorage.setItem(localstorageKey, user.accessToken || "");
+  window.localStorage.setItem(localstorageKey, user.accessToken || "")
+  window.localStorage.setItem(userIDStorageKey, user.user.id || "")
   return user
 }
 

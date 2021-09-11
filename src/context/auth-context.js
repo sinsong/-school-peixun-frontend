@@ -6,9 +6,10 @@ import {http} from "../utils/http"
 const loggedUser = async () => {
   let user = null
   let token = auth.getToken()
+  let userID = auth.getCurrentUserID()
   if (token)
   {
-    user = await http("600/users/6", {token})
+    user = await http(`600/users/${userID}`, { token })
   }
   return user
 }

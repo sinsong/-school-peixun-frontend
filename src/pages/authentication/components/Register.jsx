@@ -1,16 +1,18 @@
 import { useAuth } from "../../../context/auth-context"
 import { Button, Form, Input, notification } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
+import { useAsync } from "../../../utils/use-async"
 
 const Item = Form.Item // 用来缩写
 
 export const Register = () => {
   const { register } = useAuth()
+  const { run, isLoading } = useAsync(undefined, { throwOnError: true })
   
   const handleSubmit = ({cpassword, ...value}) => {
     if (cpassword === value.password)
     {
-      register(value)
+      run(register(value))
     }
     else
     {
@@ -48,7 +50,7 @@ export const Register = () => {
         <Input.Password prefix={<LockOutlined />} placeholder="确认密码" className="site-form-item-icon" />
       </Form.Item>
       <Form.Item>
-        <Button style={{width: "100%"}} type={"primary"} htmlType={"submit"}>注册</Button>
+        <Button loading={ isLoading } style={{width: "100%"}} type={"primary"} htmlType={"submit"}>注册</Button>
       </Form.Item>
     </Form>
   )
