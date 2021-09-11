@@ -1,6 +1,6 @@
 import "../index.css"
 import { useAuth } from "../../../context/auth-context"
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, message } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 import { useAsync } from "../../../utils/use-async"
 
@@ -9,7 +9,9 @@ export const Login = () => {
   const { run, isLoading } = useAsync(undefined, { throwOnError: true })
 
   const handleSubmit = (value) => {
-    run(login(value))
+    run(login(value)).catch(error=>{
+      message.error(error.message)
+    })
   }
 
   return (

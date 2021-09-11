@@ -1,5 +1,5 @@
 import { useAuth } from "../../../context/auth-context"
-import { Button, Form, Input, notification } from "antd"
+import { Button, Form, Input, message, notification } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 import { useAsync } from "../../../utils/use-async"
 
@@ -12,7 +12,9 @@ export const Register = () => {
   const handleSubmit = ({cpassword, ...value}) => {
     if (cpassword === value.password)
     {
-      run(register(value))
+      run(register(value)).catch((error)=>{
+        message.error(error.message)
+      })
     }
     else
     {
