@@ -45,6 +45,5 @@ export const http = async (path, {data, token, ...restConfig}) => {
 
 // 自定义钩子命名用 use 前缀
 export const useHttp = () => {
-  const { user } = useAuth()
-  return (...[path, config]) => http(path, {...config, token: user?.accessToken})
+  return (...[path, config]) => http(path, {...config, token: auth.getToken()})
 }
