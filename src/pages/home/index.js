@@ -14,7 +14,7 @@ const Home = () => {
     const [ visible, setVisible ] = useState(false) // 模态框的显示
     const { logout } = useAuth();
     const form = createRef()
-    const { run, isLoading } = useAsync(undefined, {throwOnError: true})
+    const { run, isLoading } = useAsync(undefined, { throwOnError: true })
     const postAttendance = useHttp()
 
     const handleCalendarSelect = (date) => {
@@ -74,7 +74,7 @@ const Home = () => {
                 <Menu.Item key="2">nav 2</Menu.Item>
                 <Menu.Item key="3">nav 3</Menu.Item>
             </Menu>
-            <div theme="dark" style={{position: "absolute", top: "0", right: "0"}}>
+            <div style={{position: "absolute", top: "0", right: "0"}}>
                 <Dropdown overlay={menu} trigger={["click"]}>
                     <Button type="link" style={{paddingRight: 0}}>个人<DownOutlined /></Button>
                 </Dropdown>
@@ -88,7 +88,7 @@ const Home = () => {
             </Breadcrumb>
 
             <div className="site-layout-background" style={{padding: 24, minHeight: 380}}>
-                <Calendar onSelect={handleCalendarSelect}></Calendar>
+                <Calendar onSelect={handleCalendarSelect} />
                 <Modal title="填写请假信息" width={800} visible={visible} footer={[
                     <Button type="primary" htmlType="submit" onClick={handleAttendaceInfo}>确定</Button>,
                     <Button onClick={()=>{setVisible(false); form.current.setFieldsValue({
