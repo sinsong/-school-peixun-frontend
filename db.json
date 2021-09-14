@@ -23,39 +23,6 @@
     }
   ],
   "attendance": [
-    {
-      "name": "someone",
-      "type": "事假",
-      "reason": "hehe",
-      "id": 1
-    },
-    {
-      "name": "someone",
-      "type": "事假",
-      "range": "2021-09-14 16:20~2021-09-24 16:20",
-      "reason": "sdfsdafsadvsdavdsav",
-      "id": 2
-    },
-    {
-      "name": "someone",
-      "type": "事假",
-      "range": "2021-09-14 16:24~2021-09-30 16:24",
-      "reason": "sdvcasdvasdvcasd",
-      "id": 3
-    },
-    {
-      "name": "someone",
-      "type": "事假",
-      "reason": "fasdfvsadfvasdfvasdvfsdv",
-      "range": "2021-09-14 16:32~2021-09-30 16:32",
-      "id": 4
-    },
-    {
-      "name": "someone",
-      "type": "事假",
-      "range": "2021-09-14 16:39~2021-09-30 16:39",
-      "reason": "ssadfasdf",
-      "id": 5
-    }
+    
   ]
 }
