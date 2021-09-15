@@ -95,7 +95,6 @@ const Attendance = () => {
       <Breadcrumb style={{ margin: "16px 0" }}>
         <Breadcrumb.Item>主页</Breadcrumb.Item>
         <Breadcrumb.Item >请假申请</Breadcrumb.Item>
-
       </Breadcrumb>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
         <div>

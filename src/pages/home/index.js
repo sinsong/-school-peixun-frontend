@@ -1,9 +1,10 @@
-import { useAuth } from "../../context/auth-context"
+import { Switch, Route, Link, BrowserRouter as Router, Redirect } from "react-router-dom"
 import { Button, Dropdown, Menu, Layout } from "antd"
 import { DownOutlined, LogoutOutlined } from "@ant-design/icons"
 import "./index.less"
+import { useAuth } from "../../context/auth-context"
 import Attendance from "../attendance"
-import { Switch, Route, Link, BrowserRouter as Router, Redirect } from "react-router-dom"
+import AttendanceList from "../att-list"
 
 const { Header, Content, Footer } = Layout
 
@@ -43,7 +44,7 @@ const Home = () => {
                             <Attendance />
                         </Route>
                         <Route path="/manage">
-                            {/* <AttendanceList /> */}
+                            <AttendanceList />
                         </Route>
                         <Redirect from="/" to="/apply"></Redirect>
                     </Switch>
