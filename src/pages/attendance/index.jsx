@@ -102,8 +102,8 @@ const Attendance = () => {
         </div>
         <Calendar dateCellRender={dateCellRender} />
         <Modal title="填写请假信息" width={800} visible={visible} footer={[
-          <Button type="primary" htmlType="submit" onClick={handleAttendanceInfo}>确定</Button>,
-          <Button onClick={() => {
+          <Button key="conform" type="primary" htmlType="submit" onClick={handleAttendanceInfo}>确定</Button>,
+          <Button key="cancel" onClick={() => {
             setVisible(false); form.current.setFieldsValue({
               name: "", range: "", type: -1, reason: ""
             })

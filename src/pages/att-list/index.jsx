@@ -16,7 +16,7 @@ const AttendanceList = () => {
   useEffect(()=>{
     run(fetchAttendanceList("660/attendance")).then(result=>{
       message.success("成功获取记录")
-      setList([...result])
+      setList(result.reverse())
     }).catch(error=>{
       message.error(error.message)
     })
@@ -28,7 +28,7 @@ const AttendanceList = () => {
         <Breadcrumb.Item>主页</Breadcrumb.Item>
         <Breadcrumb.Item >考勤管理</Breadcrumb.Item>
       </Breadcrumb>
-      <Table dataSource={list} loading={isLoading}>
+      <Table dataSource={list} loading={isLoading} rowKey="id">
         <Column align="center" title="序号" dataIndex="id" key="id" />
         <Column align="center" title="姓名" dataIndex="name" key="name" />
         <Column align="center" title="请假类型" dataIndex="type" key="type" />
@@ -71,10 +71,10 @@ const AttendanceList = () => {
               justifyContent: "space-evenly"
             }}>
               <Tooltip title="同意申请">
-                <Button onClick={()=>handleClick("success", "已同意")} disabled={(record)=>record.status !== "processing"} size="small" type="primary" icon={<CheckOutlined />} />
+                <Button onClick={()=>handleClick("success", "已同意")} disabled={record.status !== "processing"} size="small" type="primary" icon={<CheckOutlined />} />
               </Tooltip>
               <Tooltip title="拒绝申请">
-                <Button onClick={()=>handleClick("error", "已拒绝")} disabled={(record)=>record.status !== "processing"} size="small" type="primary" danger icon={<CloseOutlined />} />
+                <Button onClick={()=>handleClick("error", "已拒绝")} disabled={record.status !== "processing"} size="small" type="primary" danger icon={<CloseOutlined />} />
               </Tooltip>
             </span>
           )
