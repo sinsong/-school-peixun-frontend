@@ -14,8 +14,8 @@ export const http = async (path, {data, token, ...restConfig}) => {
     method: "GET",
     headers: {
       "Content-Type": data ? "application/json" : "",
-      Authorization: token ? `Bearer ${token}` : ""
     },
+    credentials: 'include', // 为了保持登录
     ...restConfig
   }
 

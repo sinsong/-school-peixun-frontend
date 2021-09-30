@@ -1,0 +1,10 @@
+POST http://localhost:8080/user/login
+Content-Type: application/json
+
+{
+    "user": {
+        "account": "teacher",
+        "pwd": "12345678"
+    },
+    "role": 1
+}

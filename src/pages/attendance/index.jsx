@@ -16,19 +16,23 @@ const Attendance = () => {
   const getAttendanceList = useHttp()
 
   useEffect(() => {
-    run(getAttendanceList("660/attendance", { data: { userID: auth.getCurrentUserID() } })).then(result => {
+    // 请求接口
+    var reqapi = auth.getCurrentUserRole() === "0" ? "jt/stu/searchjt" : "jt/teacher/searchjt"
+    // 发起请求
+    run(getAttendanceList(reqapi)).then(result => {
+
       const list = new Map()
       const currentMonth = (new Date()).getMonth()
-      result.forEach(item => {
-        const start = item.range.split("~")[0]
-        const startDate = new Date(start)
+
+      result.data.forEach(item => {
+        const startDate = new Date(item.s_time)
         const month = startDate.getMonth()
         const day = startDate.getDate()
         if (month === currentMonth) {
           list.has(day) ? list.get(day).push(item) : list.set(day, [item])
         }
-
       })
+
       setAttendanceList(list)
     })
     setAttendanceList(new Map())
@@ -41,28 +45,19 @@ const Attendance = () => {
   const handleAttendanceInfo = () => {
     const value = form.current.getFieldValue()
     const date = value.range[0].date()
+
+    // 请假日期
     if (value.range) {
-      const start = value.range[0].format("YYYY-MM-DD HH:mm")
-      const end = value.range[1].format("YYYY-MM-DD HH:mm")
-      value.range = `${start}~${end}`
+      value.s_time = value.range[0].format("YYYY-MM-DD")
+      value.e_time = value.range[1].format("YYYY-MM-DD")
     }
-    if (value.type) {
-      switch (value.type) {
-        case 1:
-          value.type = "事假"
-          break
-        case 2:
-          value.type = "病假"
-          break
-        default:
-          value.type = "其他"
-          break
-      }
-    }
-    value.userID = auth.getCurrentUserID() // 用于关联用户 id
+    delete value.range
+
+    // value.userID = auth.getCurrentUserID() // 用于关联用户 id
+
     // 状态标志 processing, success, reject
     value.status = 'processing'
-    run(postAttendance("660/attendance", { method: "POST", data: value })).then(() => {
+    run(postAttendance("jt/addjt", { method: "POST", data: value })).then(() => {
       message.success("已提交申请")
       setVisible(false)
       attendanceList.has(date) ? attendanceList.get(date).push(value) : attendanceList.set(date, [value])
@@ -77,7 +72,9 @@ const Attendance = () => {
     if (!attendanceList)
       return
     const date = value.date()
-    if (attendanceList.has(date)) {
+    const month = value.month()
+    const currentMonth = (new Date()).getMonth()
+    if (attendanceList.has(date) && month === currentMonth) {
       const list = attendanceList.get(date)
       return <ul style={{ listStyle: "none" }}>
         {
@@ -98,7 +95,7 @@ const Attendance = () => {
       </Breadcrumb>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
         <div>
-          <Button type="primary" onClick={handleCalendarSelect}>请假</Button>
+          <Button type="primary" onClick={handleCalendarSelect} disabled={auth.getCurrentUserRole() === "1"}>请假</Button>
         </div>
         <Calendar dateCellRender={dateCellRender} />
         <Modal title="填写请假信息" width={800} visible={visible} footer={[
@@ -110,14 +107,10 @@ const Attendance = () => {
           }}>取消</Button>
         ]}>
           <Form onFinish={handleAttendanceInfo} ref={form}>
-            <Form.Item label="姓名" name="name">
-              <Input />
-            </Form.Item>
             <Form.Item label="请假类型" name="type">
               <Radio.Group>
-                <Radio value={1}>事假</Radio>
-                <Radio value={2}>病假</Radio>
-                <Radio value={3}>其他</Radio>
+                <Radio value={"事假"}>事假</Radio>
+                <Radio value={"病假"}>病假</Radio>
               </Radio.Group>
             </Form.Item>
             <Form.Item label="请假时间" name="range">

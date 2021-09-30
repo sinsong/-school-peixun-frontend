@@ -1,0 +1,14 @@
+POST http://localhost:8080/user/register
+Content-Type: application/json
+
+{
+    "user": {
+        "account": "ming",
+        "pwd": "12345678"
+    },
+    "info": {
+        "name": "小明",
+        "clazz": "Java 班"
+    },
+    "role": 0
+}
